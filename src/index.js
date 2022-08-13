@@ -95,14 +95,22 @@ async function main() {
     path: "/graphql",
     cors: {
       credentials: true,
-      origin: ["http://localhost:3000", "https://studio.apollographql.com"],
+      origin: [
+        "http://localhost:3000",
+        "https://garmin-clone-frontend.herokuapp.com/",
+        "https://studio.apollographql.com",
+      ],
     },
   });
 
   await new Promise((resolve) =>
     httpServer.listen({ port: process.env.PORT || 4001 }, resolve)
   );
-  console.log(`🚀 Server ready at http://localhost:4001${server.graphqlPath}`);
+  console.log(
+    `🚀 Server ready at http://localhost:${process.env.PORT || 4001}${
+      server.graphqlPath
+    }`
+  );
 }
 
 main();
