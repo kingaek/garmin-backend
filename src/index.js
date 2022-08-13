@@ -98,6 +98,7 @@ async function main() {
       origin: [
         "http://localhost:3000",
         "https://garmin-clone-frontend.herokuapp.com/",
+        "https://garmin-clone.vercel.app/",
         "https://studio.apollographql.com",
       ],
     },
