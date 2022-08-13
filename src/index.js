@@ -95,14 +95,7 @@ async function main() {
     path: "/graphql",
     cors: {
       credentials: true,
-      origin: [
-        "http://localhost:3000",
-        "https://vercel.com/",
-        "https://garmin-clone-mclfgwqr0-aekryz1993.vercel.app/",
-        "https://garmin-clone-frontend.herokuapp.com/",
-        "https://garmin-clone.vercel.app/",
-        "https://studio.apollographql.com",
-      ],
+      origin: "*",
     },
   });
 
