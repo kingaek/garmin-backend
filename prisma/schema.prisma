@@ -1,0 +1,193 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Banner {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  imgM      String?
+  imgT      String?
+  imgD      String?
+  title     String   @unique
+  subtitle  String
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt
+}
+
+model Featured {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  img       String
+  title     String   @unique
+  subtitle  String
+  new       Boolean  @default(false)
+  sale      Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt
+}
+
+model Pod {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  img       String
+  title     String   @unique
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt
+}
+
+model CoverImgList {
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+  img        String
+  title      String    @unique
+  subtitle   String
+  category   Category? @relation(fields: [categoryId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  categoryId String?   @db.ObjectId
+}
+
+model Category {
+  id            String         @id @default(auto()) @map("_id") @db.ObjectId
+  name          String         @unique
+  displayName   String         @unique
+  img           String
+  title         String
+  coverImg      String
+  coverImgsList CoverImgList[]
+  series        Serie[]
+  updateAt      DateTime       @updatedAt
+}
+
+model Serie {
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+  name       String
+  category   Category  @relation(fields: [categoryId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  categoryId String    @db.ObjectId
+  products   Product[]
+  updateAt   DateTime  @updatedAt
+}
+
+enum Gender {
+  Male
+  Female
+}
+
+model ChosenFeature {
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+  name       String
+  item       String
+  cartItem   CartItem? @relation(fields: [cartItemId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  cartItemId String?   @db.ObjectId
+  updateAt   DateTime  @updatedAt
+}
+
+model ProductFeature {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  description String?
+  items       String[]
+  product     Product  @relation(fields: [productId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  productId   String   @db.ObjectId
+  updateAt    DateTime @updatedAt
+}
+
+model Model {
+  id        String     @id @default(auto()) @map("_id") @db.ObjectId
+  color     String
+  img       String
+  product   Product    @relation(fields: [productId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  productId String     @db.ObjectId
+  cartItems CartItem[]
+  updateAt  DateTime   @updatedAt
+}
+
+model Product {
+  id                    String           @id @default(auto()) @map("_id") @db.ObjectId
+  name                  String           @unique
+  description           String?
+  subDescription        String?
+  subscriptionUrl       String?
+  partNumber            String
+  gender                Gender?
+  price                 Float
+  formattedPrice        String
+  oldPrice              Float?
+  formattedOldPrice     String?
+  interestFree          Float?
+  formattedInterestFree String?
+  imgList               String[]
+  features              ProductFeature[]
+  models                Model[]
+  video                 String?
+  sale                  Boolean          @default(false)
+  available             Boolean          @default(false)
+  new                   Boolean          @default(false)
+  cartItems             CartItem[]
+  serie                 Serie            @relation(fields: [serieId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  serieId               String           @db.ObjectId
+  createdAt             DateTime         @default(now())
+  updateAt              DateTime         @updatedAt
+}
+
+model CartItem {
+  id        String          @id @default(auto()) @map("_id") @db.ObjectId
+  product   Product         @relation(fields: [productId], references: [id])
+  productId String          @db.ObjectId
+  quantity  Int             @default(1)
+  model     Model?          @relation(fields: [modelId], references: [id])
+  modelId   String?         @db.ObjectId
+  features  ChosenFeature[]
+  cart      Cart?           @relation(fields: [cartId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  cartId    String?         @db.ObjectId
+  createdAt DateTime        @default(now())
+  order     Order?          @relation(fields: [orderId], references: [id])
+  orderId   String?         @db.ObjectId
+  updateAt  DateTime        @updatedAt
+}
+
+model Cart {
+  id                      String     @id @default(auto()) @map("_id") @db.ObjectId
+  subtotal                Float      @default(0.00)
+  formattedSubtotal       String     @default("$0.00 USD")
+  estimatedTotal          Float      @default(0.00)
+  formattedEstimatedTotal String     @default("$0.00 USD")
+  expires                 DateTime?
+  inSession               Boolean    @default(true)
+  cartItems               CartItem[]
+  user                    User?
+  createdAt               DateTime   @default(now())
+  updateAt                DateTime   @updatedAt
+}
+
+enum Role {
+  Admin
+  Customer
+}
+
+model User {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  username  String?  @unique
+  role      Role
+  isActive  Boolean  @default(true)
+  cart      Cart?    @relation(fields: [cartId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  cartId    String?  @unique @db.ObjectId
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt
+}
+
+enum OrderStatus {
+  PANDING
+  SHIPPED
+  CANCELED
+  ARRIVED
+  COMPLETED
+}
+
+model Order {
+  id        String      @id @default(auto()) @map("_id") @db.ObjectId
+  status    OrderStatus
+  products  CartItem[]
+  createdAt DateTime    @default(now())
+}
