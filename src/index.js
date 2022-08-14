@@ -99,7 +99,7 @@ async function main() {
         "http://localhost:3000",
         "https://vercel.com/aekryz1993/garmin-clone/BYSrcaFv1R45F8EG9gCif37EyNg2",
         "http://192.168.100.10:3000",
-        // "https://vercel.com/",
+        "https://garmin-clone.vercel.app/",
         "https://garmin-clone-o48qfmlrx-aekryz1993.vercel.app/",
         // "https://garmin-clone-frontend.herokuapp.com/",
         "https://garmin-clone.vercel.app/",
