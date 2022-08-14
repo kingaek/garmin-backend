@@ -88,9 +88,8 @@ async function refreshToken(_, __, { prisma, userId, res }) {
 
   res.cookie("refresh_token", refresh_token, {
     httpOnly: true,
-    sameSite: "none",
-    secure: false,
-    // secure: true,
+    sameSite: "strict",
+    secure: true,
     // signed: true,
     maxAge: expires_in,
   });
