@@ -10,8 +10,8 @@ async function login(_, { username }, { prisma, res, cookies }) {
 
   res.cookie("refresh_token", refresh_token, {
     httpOnly: true,
-    // sameSite: "strict",
-    // secure: true,
+    sameSite: "strict",
+    secure: true,
     // signed: true,
     maxAge: expires_in,
   });
@@ -88,8 +88,8 @@ async function refreshToken(_, __, { prisma, userId, res }) {
 
   res.cookie("refresh_token", refresh_token, {
     httpOnly: true,
-    // sameSite: "strict",
-    // secure: true,
+    sameSite: "strict",
+    secure: true,
     // signed: true,
     maxAge: expires_in,
   });
@@ -267,8 +267,8 @@ async function signup(_, { username }, { prisma, res, cookies }) {
 
   res.cookie("refresh_token", refresh_token, {
     httpOnly: true,
-    // sameSite: "strict",
-    // secure: true,
+    sameSite: "strict",
+    secure: true,
     // signed: true,
     maxAge: expires_in,
   });
