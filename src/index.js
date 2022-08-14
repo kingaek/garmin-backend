@@ -97,17 +97,21 @@ async function main() {
       credentials: true,
       origin: [
         "http://localhost:3000",
+        "http://192.168.100.10:3000",
         // "https://vercel.com/",
-        // "https://garmin-clone-mclfgwqr0-aekryz1993.vercel.app/",
+        "garmin-clone-o48qfmlrx-aekryz1993.vercel.app",
         // "https://garmin-clone-frontend.herokuapp.com/",
-        // "https://garmin-clone.vercel.app/",
+        "https://garmin-clone.vercel.app/",
         // "https://studio.apollographql.com",
       ],
     },
   });
 
   await new Promise((resolve) =>
-    httpServer.listen({ port: process.env.PORT || 4001 }, resolve)
+    httpServer.listen(
+      { host: "192.168.100.10", port: process.env.PORT || 4001 },
+      resolve
+    )
   );
   console.log(
     `🚀 Server ready at http://localhost:${process.env.PORT || 4001}${
