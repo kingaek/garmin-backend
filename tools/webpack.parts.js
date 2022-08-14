@@ -4,7 +4,7 @@ const NodemonPlugin = require("nodemon-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
 const CopyPlugin = require("copy-webpack-plugin");
 
-const APP_SOURCE = path.join(__dirname, "server");
+const APP_SOURCE = path.join(__dirname, "src");
 
 exports.loadJavaScript = () => ({
   module: {
@@ -41,7 +41,7 @@ exports.copyFiles = (currentDir) => ({
       patterns: [
         {
           from: path.resolve(currentDir, "src", "schema.graphql"),
-          to: path.resolve(currentDir, "dest"),
+          to: path.resolve(currentDir, "public"),
         },
       ],
     }),
