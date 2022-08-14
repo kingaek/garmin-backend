@@ -94,8 +94,8 @@ async function main() {
     app,
     path: "/graphql",
     cors: {
+      origin: "*",
       credentials: true,
-      origin: "(0.0.0.0)",
       // origin: [
       //   "http://localhost:3000",
       //   "garmin-clone.netlify.app",
