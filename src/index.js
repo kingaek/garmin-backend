@@ -95,7 +95,7 @@ async function main() {
     path: "/graphql",
     cors: {
       credentials: true,
-      origin: ["*"],
+      origin: ["0.0.0.0", "*"],
       // origin: [
       //   "http://localhost:3000",
       //   "garmin-clone-aekryz1993.vercel.app",
