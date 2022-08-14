@@ -108,10 +108,7 @@ async function main() {
   });
 
   await new Promise((resolve) =>
-    httpServer.listen(
-      { host: "192.168.100.10", port: process.env.PORT || 4001 },
-      resolve
-    )
+    httpServer.listen({ port: process.env.PORT || 4001 }, resolve)
   );
   console.log(
     `🚀 Server ready at http://localhost:${process.env.PORT || 4001}${
