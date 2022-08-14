@@ -66,6 +66,7 @@ async function main() {
 
       return {
         ...req,
+        req,
         res,
         prisma,
         pubsub,
@@ -97,14 +98,14 @@ async function main() {
       // origin: "*",
       credentials: true,
       origin: [
-        "https://localhost:3000",
+        "http://localhost:3000",
         "https://garmin-clone.netlify.app/",
         "https://62f8c9ae94aca554c7cf5d75--friendly-fox-a3e655.netlify.app/",
         "garmin-clone-aekryz1993.vercel.app",
         "garmin-clone-git-main-aekryz1993.vercel.app",
         "garmin-clone.vercel.app",
         "https://vercel.com/aekryz1993/garmin-clone/BYSrcaFv1R45F8EG9gCif37EyNg2",
-        "https://192.168.100.10:3000",
+        "http://192.168.100.10:3000",
         "https://garmin-clone.vercel.app/",
         "https://garmin-clone-o48qfmlrx-aekryz1993.vercel.app/",
         // "https://garmin-clone-frontend.herokuapp.com/",
