@@ -97,6 +97,9 @@ async function main() {
       credentials: true,
       origin: [
         "http://localhost:3000",
+        "garmin-clone-aekryz1993.vercel.app",
+        "garmin-clone-git-main-aekryz1993.vercel.app",
+        "garmin-clone.vercel.app",
         "https://vercel.com/aekryz1993/garmin-clone/BYSrcaFv1R45F8EG9gCif37EyNg2",
         "http://192.168.100.10:3000",
         "https://garmin-clone.vercel.app/",
