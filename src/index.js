@@ -97,7 +97,7 @@ async function main() {
       // origin: "*",
       credentials: true,
       origin: [
-        "http://localhost:3000",
+        "https://localhost:3000",
         "https://garmin-clone.netlify.app/",
         "https://62f8c9ae94aca554c7cf5d75--friendly-fox-a3e655.netlify.app/",
         "garmin-clone-aekryz1993.vercel.app",
