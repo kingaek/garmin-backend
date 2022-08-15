@@ -27,6 +27,7 @@ async function main() {
   await createSeed(prisma);
 
   const app = express();
+  app.enable("trust proxy");
   const httpServer = createServer(app);
 
   app.use(cookieParser(APP_SECRET));
@@ -66,7 +67,6 @@ async function main() {
 
       return {
         ...req,
-        req,
         res,
         prisma,
         pubsub,
