@@ -172,22 +172,22 @@ async function cart(
     });
   }
 
-  if (cookies?.cartId) {
-    // if (cookies.cartId !== cartId)
-    //   throw new ForbiddenError("Forbidden Request");
-    return await prisma.cart.findUnique({
-      where: { id: cartId },
-      include: {
-        cartItems: {
-          include: {
-            product: true,
-            model: true,
-            features: true,
-          },
+  // if (cookies?.cartId) {
+  // if (cookies.cartId !== cartId)
+  //   throw new ForbiddenError("Forbidden Request");
+  return await prisma.cart.findUnique({
+    where: { id: cartId },
+    include: {
+      cartItems: {
+        include: {
+          product: true,
+          model: true,
+          features: true,
         },
       },
-    });
-  }
+    },
+  });
+  // }
 
   throw new ForbiddenError("Forbidden Request");
 }
