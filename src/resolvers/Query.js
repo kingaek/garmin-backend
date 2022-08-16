@@ -175,6 +175,7 @@ async function cart(
   // if (cookies?.cartId) {
   // if (cookies.cartId !== cartId)
   //   throw new ForbiddenError("Forbidden Request");
+  console.log(cartId);
   return await prisma.cart.findUnique({
     where: { id: cartId },
     include: {
@@ -189,7 +190,7 @@ async function cart(
   });
   // }
 
-  throw new ForbiddenError("Forbidden Request");
+  // throw new ForbiddenError("Forbidden Request");
 }
 
 async function initialCart(_, { cartId }, { prisma }) {
