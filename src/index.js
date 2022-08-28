@@ -103,6 +103,7 @@ async function main() {
         "http://192.168.100.10:3000",
         "https://studio.apollographql.com",
         "https://garmin-clone-frontend.herokuapp.com",
+        "https://garmin-website.herokuapp.com",
       ],
     },
   });
