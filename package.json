@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "webpack --env development --config ./tools/webpack.dev.js --watch",
     "build": "webpack --env production --config ./tools/webpack.prod.js",
-    "start": "npm run build && node ./dest/main",
+    "start": "node ./dest/main",
     "prisma-init": "npx prisma init"
   },
   "keywords": [],
