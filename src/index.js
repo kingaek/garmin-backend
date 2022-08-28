@@ -11,7 +11,6 @@ import { useServer } from "graphql-ws/lib/use/ws";
 import { PrismaClient } from "@prisma/client";
 import { PubSub } from "graphql-subscriptions";
 
-import createSeed from "./seeds";
 import resolvers from "./resolvers";
 import { APP_SECRET, getDynamicContext, getUserId } from "./utils";
 
@@ -24,8 +23,6 @@ const prisma = new PrismaClient();
 export const pubsub = new PubSub();
 
 async function main() {
-  await createSeed(prisma);
-
   const app = express();
   // app.enable("trust proxy");
   const httpServer = createServer(app);
