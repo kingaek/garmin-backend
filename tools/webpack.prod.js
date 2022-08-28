@@ -1,12 +1,7 @@
-const { merge } = require('webpack-merge');
+const { merge } = require("webpack-merge");
 
-const commonConfig = require('./webpack.common'),
-      parts = require("./webpack.parts");
+const commonConfig = require("./webpack.common");
 
-const productionConfig = merge([
-    commonConfig,
-    { mode: 'production' },
-    // parts.generateSourceMaps({ type: "source-map" })
-]);
+const productionConfig = merge([commonConfig, { mode: "production" }]);
 
-module.exports = productionConfig
+module.exports = productionConfig;
