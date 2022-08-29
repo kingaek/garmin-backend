@@ -41,7 +41,7 @@ exports.copyFiles = (currentDir) => ({
       patterns: [
         {
           from: path.resolve(currentDir, "src", "schema.graphql"),
-          to: path.resolve(currentDir, "dest"),
+          to: path.resolve(currentDir, "public"),
         },
       ],
     }),

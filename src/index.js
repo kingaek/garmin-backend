@@ -90,7 +90,7 @@ async function main() {
   await server.start();
   server.applyMiddleware({
     app,
-    path: "/",
+    path: "/graphql",
     cors: {
       credentials: true,
       origin: [

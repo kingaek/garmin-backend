@@ -8,7 +8,7 @@ const CURRENT_WORKING_DIR = process.cwd();
 
 const res = (p) => path.resolve(CURRENT_WORKING_DIR, p);
 const entry = res("src/index.js");
-const output = res("dest");
+const output = res("public");
 
 module.exports = merge([
   { name: "server" },
@@ -17,7 +17,7 @@ module.exports = merge([
   { entry: [entry] },
   {
     output: {
-      path: path.resolve(CURRENT_WORKING_DIR, "dest"),
+      path: path.resolve(CURRENT_WORKING_DIR, "public"),
       path: output,
       publicPath: "/",
     },
