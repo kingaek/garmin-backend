@@ -1,4 +1,3 @@
-import { AuthenticationError } from "apollo-server-core";
 import jwt from "jsonwebtoken";
 
 export const APP_SECRET = "App-secret";
@@ -24,20 +23,6 @@ export function signToken(sub) {
 
   return { refresh_token, expires_in };
 }
-
-// export async function getUserId(userQuery, req) {
-//   if (req) {
-//     const token = req.signedCookies.refresh_token;
-//     if (!token) throw new AuthenticationError("No token found");
-//     const { sub: userId } = getTokenPayload(token);
-//     const { role: userRole } = await userQuery.findUnique({
-//       where: { id: userId },
-//     });
-//     return { userId, userRole };
-//   }
-
-//   throw new AuthenticationError("Not authenticated");
-// }
 
 export async function getUserId(userQuery, req, authToken) {
   if (req) {
@@ -65,17 +50,6 @@ export async function getUserId(userQuery, req, authToken) {
   }
 
   return { userId: null, userRole: null };
-}
-
-export async function getDynamicContext(userQuery, ctx) {
-  const authHeader = ctx.connectionParams.Authorization;
-  if (!authHeader) return null;
-  const token = authHeader.replace("Bearer ", "");
-  if (!token) {
-    throw new AuthenticationError("No token found");
-  }
-  const { userId, userRole } = await getUserId(userQuery, undefined, token);
-  return { userId, userRole };
 }
 
 export const updateCartItems = ({ id, item, cartQueryUpdate }) =>
