@@ -9,6 +9,7 @@
     "dev": "webpack --env development --config ./tools/webpack.dev.js --watch",
     "build": "webpack --env production --config ./tools/webpack.prod.js",
     "start": "node ./public/main.js",
+    "preview": "node ./public/main.js",
     "prisma-init": "npx prisma init"
   },
   "keywords": [],
