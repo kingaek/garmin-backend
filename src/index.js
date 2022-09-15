@@ -57,7 +57,11 @@ async function main() {
     path: "/graphql",
     cors: {
       credentials: true,
-      origin: ["http://localhost:3000", "https://studio.apollographql.com"],
+      origin: [
+        "http://localhost:3000",
+        "https://garmin-website.netlify.app",
+        "https://studio.apollographql.com",
+      ],
     },
   });
 
