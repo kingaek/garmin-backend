@@ -20,6 +20,7 @@ const prisma = new PrismaClient();
 
 async function main() {
   const app = express();
+  // app.enable("trust proxy");
   const httpServer = createServer(app);
 
   app.use(cookieParser(APP_SECRET));
@@ -41,7 +42,6 @@ async function main() {
         ...req,
         res,
         prisma,
-        pubsub,
         userId: user ? user.userId : null,
         userRole: user ? user.userRole : null,
         token: user ? user.token : null,
@@ -57,7 +57,7 @@ async function main() {
     path: "/graphql",
     cors: {
       credentials: true,
-      origin: ["https://garmin-website.netlify.app"],
+      origin: ["http://localhost:3000", "https://studio.apollographql.com"],
     },
   });
 
