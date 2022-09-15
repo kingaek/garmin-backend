@@ -6,10 +6,7 @@ import path from "path";
 import cookieParser from "cookie-parser";
 import { ApolloServerPluginDrainHttpServer } from "apollo-server-core";
 import { makeExecutableSchema } from "@graphql-tools/schema";
-// import { WebSocketServer } from "ws";
-// import { useServer } from "graphql-ws/lib/use/ws";
 import { PrismaClient } from "@prisma/client";
-// import { PubSub } from "graphql-subscriptions";
 
 import resolvers from "./resolvers";
 import { APP_SECRET, getUserId } from "./utils";
@@ -20,11 +17,9 @@ const typeDefs = fs.readFileSync(
 );
 
 const prisma = new PrismaClient();
-// export const pubsub = new PubSub();
 
 async function main() {
   const app = express();
-  // app.enable("trust proxy");
   const httpServer = createServer(app);
 
   app.use(cookieParser(APP_SECRET));
@@ -33,26 +28,6 @@ async function main() {
     typeDefs,
     resolvers,
   });
-
-  // const wsServer = new WebSocketServer({
-  //   server: httpServer,
-  //   path: "/subscription",
-  // });
-
-  // const serverCleanup = useServer(
-  //   {
-  //     schema,
-  //     context: async (ctx) => {
-  //       const userAuth = await getDynamicContext({ ...prisma.user }, ctx);
-
-  //       return {
-  //         userAuth,
-  //         // pubsub,
-  //       };
-  //     },
-  //   }
-  //   // wsServer
-  // );
 
   const server = new ApolloServer({
     schema,
@@ -82,7 +57,7 @@ async function main() {
     path: "/graphql",
     cors: {
       credentials: true,
-      origin: ["https://garmin-clone.netlify.app"],
+      origin: ["https://garmin-website.netlify.app"],
     },
   });
 
