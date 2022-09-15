@@ -73,18 +73,7 @@ async function main() {
         cartId: user ? user.cartId : null,
       };
     },
-    plugins: [
-      ApolloServerPluginDrainHttpServer({ httpServer }),
-      // {
-      //   async serverWillStart() {
-      //     return {
-      //       async drainServer() {
-      //         await serverCleanup.dispose();
-      //       },
-      //     };
-      //   },
-      // },
-    ],
+    plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
   });
 
   await server.start();
@@ -93,16 +82,7 @@ async function main() {
     path: "/graphql",
     cors: {
       credentials: true,
-      origin: [
-        "http://localhost:3000",
-        "https://garmin-website.herokuapp.com",
-        "https://garmin-website2.herokuapp.com",
-        "https://garmin-clone.netlify.app",
-        "https://garmin-clone.herokuapp.com",
-        "http://192.168.100.10:3000",
-        "https://studio.apollographql.com",
-        "https://garmin-clone-frontend.herokuapp.com",
-      ],
+      origin: ["https://garmin-clone.netlify.app"],
     },
   });
 

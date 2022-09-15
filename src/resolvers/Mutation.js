@@ -10,8 +10,8 @@ async function login(_, { username }, { prisma, res, cookies }) {
 
   res.cookie("refresh_token", refresh_token, {
     httpOnly: true,
-    sameSite: "strict",
-    secure: true,
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    secure: process.env.NODE_ENV === "production",
     // signed: true,
     maxAge: expires_in,
   });
@@ -88,8 +88,8 @@ async function refreshToken(_, __, { prisma, userId, res }) {
 
   res.cookie("refresh_token", refresh_token, {
     httpOnly: true,
-    sameSite: "strict",
-    secure: true,
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    secure: process.env.NODE_ENV === "production",
     // signed: true,
     maxAge: expires_in,
   });
@@ -134,7 +134,10 @@ async function fetchOrcreateCart(
     data: {},
   });
 
-  res.cookie("cartId", cart.id);
+  res.cookie("cartId", cart.id, {
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    secure: process.env.NODE_ENV === "production",
+  });
 
   return cart;
 }
@@ -159,7 +162,10 @@ async function addItemToCart(
       },
     });
 
-    res.cookie("cartId", cart.id);
+    res.cookie("cartId", cart.id, {
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+      secure: process.env.NODE_ENV === "production",
+    });
 
     return cart;
   }
