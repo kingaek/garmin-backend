@@ -1,5 +1,5 @@
 import { AuthenticationError, ForbiddenError } from "apollo-server-core";
-import { cartItem, signToken, updateCartItems } from "../utils";
+import { cartItem, signToken } from "../utils";
 import currency from "currency.js";
 
 async function login(_, { username }, { prisma, res, cookies }) {
@@ -10,8 +10,9 @@ async function login(_, { username }, { prisma, res, cookies }) {
 
   res.cookie("refresh_token", refresh_token, {
     httpOnly: true,
-    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-    secure: process.env.NODE_ENV === "production",
+    sameSite: process.env.NODE_ENV === "production" ? "lax" : "lax",
+    // sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    // secure: process.env.NODE_ENV === "production",
     // signed: true,
     maxAge: expires_in,
   });
@@ -88,8 +89,9 @@ async function refreshToken(_, __, { prisma, userId, res }) {
 
   res.cookie("refresh_token", refresh_token, {
     httpOnly: true,
-    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-    secure: process.env.NODE_ENV === "production",
+    sameSite: process.env.NODE_ENV === "production" ? "lax" : "lax",
+    // sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    // secure: process.env.NODE_ENV === "production",
     // signed: true,
     maxAge: expires_in,
   });
@@ -135,8 +137,9 @@ async function fetchOrcreateCart(
   });
 
   res.cookie("cartId", cart.id, {
-    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-    secure: process.env.NODE_ENV === "production",
+    sameSite: process.env.NODE_ENV === "production" ? "lax" : "lax",
+    // sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    // secure: process.env.NODE_ENV === "production",
   });
 
   return cart;
@@ -163,8 +166,9 @@ async function addItemToCart(
     });
 
     res.cookie("cartId", cart.id, {
-      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "lax" : "lax",
+      // sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+      // secure: process.env.NODE_ENV === "production",
     });
 
     return cart;
@@ -273,8 +277,9 @@ async function signup(_, { username }, { prisma, res, cookies }) {
 
   res.cookie("refresh_token", refresh_token, {
     httpOnly: true,
-    sameSite: "strict",
-    secure: true,
+    sameSite: process.env.NODE_ENV === "production" ? "lax" : "lax",
+    // sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    // secure: process.env.NODE_ENV === "production",
     // signed: true,
     maxAge: expires_in,
   });
