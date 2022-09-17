@@ -59,8 +59,8 @@ async function main() {
       credentials: true,
       origin: [
         "http://localhost:3000",
-        "https://garmin-website.netlify.app",
         "https://garmin-clone-website.onrender.com",
+        "https://garmin-website.netlify.app",
         "https://studio.apollographql.com",
       ],
     },
